@@ -6,6 +6,10 @@ public class ShotgunScript : MonoBehaviour
 {
     public float damage;
     public float fireRate;
+    public int maxAmmo;
+    [SerializeField]
+    private int currentAmmo;
+    public float reloadTime;
     public int pellets;
     public float shotSpread;
     public GameObject shotEffect;
@@ -13,22 +17,53 @@ public class ShotgunScript : MonoBehaviour
     public GameObject muzzleFlash;
     private Vector3 muzzleFlashPosition;
     private bool canShoot;
+    private bool isRealoading;
+    public AudioClip[] sounds;
+    private AudioSource thisAudioSource;
 
+
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnEnable()
+    {
+        canShoot = true;
+        isRealoading = false;
+    }
 
     private void Start()
     {
         muzzleFlashPosition = new Vector3(0.004f, 0.1f, 0f);
         canShoot = true;
+        currentAmmo = maxAmmo;
+        isRealoading = false;
+        thisAudioSource = this.gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetButton("Fire1") && canShoot)
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo && !isRealoading)
         {
-            StartCoroutine(shotsPerSecond());
-            Debug.Log("click");
+            StartCoroutine(reload());
+        }
+
+        if (Input.GetButton("Fire1") && canShoot && !isRealoading)
+        {
+            if(currentAmmo <= 0)
+            {
+                //Magazine empty
+                StartCoroutine(reload());
+                Debug.Log("reload");
+            }
+            else
+            {
+                StartCoroutine(shotsPerSecond());
+            }
         }
 
     }
@@ -58,8 +93,8 @@ public class ShotgunScript : MonoBehaviour
             }
         }
 
-
         Instantiate(muzzleFlash, transform.position, transform.parent.gameObject.transform.rotation, this.transform);
+        currentAmmo--;
 
     }
 
@@ -67,16 +102,19 @@ public class ShotgunScript : MonoBehaviour
     {
         canShoot = false;
         shoot();
+        thisAudioSource.PlayOneShot(sounds[0]);
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
     }
 
-    private void OnDisable()
+    IEnumerator reload()
     {
-        StopAllCoroutines();
+        isRealoading = true;
+        thisAudioSource.PlayOneShot(sounds[1]);
+        yield return new WaitForSeconds(reloadTime);
+        currentAmmo = maxAmmo;
+        isRealoading = false;
+
     }
-    private void OnEnable()
-    {
-        canShoot = true;
-    }
+
 }

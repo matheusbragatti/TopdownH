@@ -563,7 +563,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.6
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -857,9 +857,33 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1388290044889296932, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
+      propertyPath: damage
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388290044889296932, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
+      propertyPath: maxAmmo
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388290044889296932, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
       propertyPath: pellets
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1388290044889296932, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
+      propertyPath: reloadTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388290044889296932, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
+    - target: {fileID: 1388290044889296932, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
+      propertyPath: sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
+    - target: {fileID: 1388290044889296932, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
+      propertyPath: sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
     - target: {fileID: 2273670170639557529, guid: 629ea85fb8c36cd49bdd267fb1f30aa3, type: 3}
       propertyPath: m_RootOrder
       value: 1
